@@ -10,7 +10,7 @@ export function UserContextProvider(props){
 
 const signUp = (email, pwd) => createUserWithEmailAndPassword(auth, email, pwd);
 
-//User login
+//User login si on est connecté ou inscrit
 const [currentUser, setCurrentUser] = useState();
 
 //temps de reponse de firebase

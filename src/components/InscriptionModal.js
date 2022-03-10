@@ -48,8 +48,20 @@ const InscriptionModal  = () => {
             console.log(cred);
         }
         catch(err){
+            if(err.code === 'auth/invalid-email'){
+                setValidation("Email format invalid");
+            }
 
+            if(err.code ==="auth/email-already-in-use"){
+                setValidation("Email already in use");
+            }
         }
+    }
+
+
+    const closeModal=() =>{
+        setValidation("");
+        toggleModal("close");
     }
 
 
@@ -58,7 +70,7 @@ const InscriptionModal  = () => {
     {
         modalState.signUpModal && (
         <div className='position-fixed top-0 vw-100 vh-100'> 
-            <div  className="w-100 h100 bg-dark bg-opacity-75">
+            <div onClick={closeModal} className="w-100 h100 bg-dark bg-opacity-75">
                 <div className="position-absolute top-50 start-50 translate-middle" style={{minWidth:"400px"}}>
                     <div className="modal-dialog">
                         <div className="modal-content">
@@ -66,7 +78,7 @@ const InscriptionModal  = () => {
                             <div className="modal-header">
 
                                  <h5 className="modal-title">Inscription</h5>
-                                 <button onClick={()=> toggleModal("close")} className="btn-close"></button>
+                                 <button onClick={()=> closeModal} className="btn-close"></button>
                             </div>   
                             <div className="modal-body">
                                 <form onSubmit={handleForm} className="sign-up-form">

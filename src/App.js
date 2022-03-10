@@ -12,6 +12,11 @@ function App() {
     <Navbar/>
      <Routes>
         <Route path="/" element={<Home/>}/>
+        {/* Creation de route privée  */}
+
+        <Route path="/private" element={<Private/>} >
+          <Route path="/private/private-home" element={<PrivateHome/>}></Route>
+        </Route>
       </Routes>
     </>
   );
