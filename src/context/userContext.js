@@ -1,10 +1,20 @@
 import { createContext, useEffect, useState } from "react";
 
+import {signInWithEmailAndPassword,createUserWithEmailAndPassword, onAuthStateChanged} from "firebase/auth"
 
+import{auth} from "../firebase-config"
 export const  UserContext = createContext()
 
-
 export function UserContextProvider(props){
+
+
+const signUp = (email, pwd) => createUserWithEmailAndPassword(auth, email, pwd);
+
+//User login
+const [currentUser, setCurrentUser] = useState();
+
+//temps de reponse de firebase
+const [loadingData, setLoadingData]  = useState(true);
 
 const [modalState , setModalState] = useState({
     signUpModal : false,
@@ -34,7 +44,7 @@ const toggleModal = modal =>{
 
 }
 return(
-    <UserContext.Provider value={{modalState, toggleModal}}>
+    <UserContext.Provider value={{modalState, toggleModal, signUp}}>
         {props.children}
     </UserContext.Provider>
 )

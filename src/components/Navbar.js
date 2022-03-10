@@ -1,7 +1,6 @@
 import React , {useContext} from "react";
 import { UserContext } from "../context/userContext";
 import { Link } from "react-router-dom";
-import InscriptionModal from "./InscriptionModal";
 
 const Navbar = () =>{
     
