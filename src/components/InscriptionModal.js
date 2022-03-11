@@ -83,7 +83,7 @@ const InscriptionModal  = () => {
                             <div className="modal-header">
 
                                  <h5 className="modal-title">Inscription</h5>
-                                 <button onClick={()=> closeModal} className="btn-close"></button>
+                                 <button onClick={ closeModal} className="btn-close"></button>
                             </div>   
                             <div className="modal-body">
                                 <form onSubmit={handleForm} className="sign-up-form">
@@ -109,7 +109,7 @@ const InscriptionModal  = () => {
                                         <p className="text-danger mt-1">{validation}</p>
                                     </div>
 
-                                    <button className="btn btn-primary">S'inscrire</button> 1:10:21
+                                    <button onClick={closeModal} className="btn btn-primary">S'inscrire</button> 1:10:21
                                 </form>    
                             </div>
                         </div>
