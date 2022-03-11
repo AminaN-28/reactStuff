@@ -1,10 +1,16 @@
 import React , {useRef,useState, useContext} from 'react'
 import { UserContext } from '../context/userContext';
+
+import { useNavigate } from 'react-router-dom';
+
 const InscriptionModal  = () => {
 
 
     const {modalState, toggleModal , signUp} = useContext(UserContext)
-    console.log(signUp);
+    
+    // console.log(signUp);
+
+    const navigate =useNavigate();
 
     const inputs = useRef([])
   
@@ -24,18 +30,15 @@ const InscriptionModal  = () => {
         e.preventDefault()
 
         if((inputs.current[1].value.length || inputs.current[2].value.length)< 6){
-            setValidation("Type at least 6 characters !!!")
+            setValidation("Saisissez au minimum 6 caractéres !!!")
 
             return ;
         }
         else if (inputs.current[1].value !== inputs.current[2].value)
         {
-            setValidation("Passwords don't match")
+            setValidation("Les mots de passe ne correspondent pas")
             return;
         }
-
-
-
 
         try{
             const cred = await signUp(
@@ -45,15 +48,17 @@ const InscriptionModal  = () => {
 
             formRef.current.reset();
             setValidation("");
+            
+            navigate("/private/private-home")
             console.log(cred);
         }
         catch(err){
             if(err.code === 'auth/invalid-email'){
-                setValidation("Email format invalid");
+                setValidation("Format invalide");
             }
 
             if(err.code ==="auth/email-already-in-use"){
-                setValidation("Email already in use");
+                setValidation("Email déja utilisé");
             }
         }
     }
@@ -70,7 +75,7 @@ const InscriptionModal  = () => {
     {
         modalState.signUpModal && (
         <div className='position-fixed top-0 vw-100 vh-100'> 
-            <div onClick={closeModal} className="w-100 h100 bg-dark bg-opacity-75">
+            <div  className="w-100 h100 bg-dark bg-opacity-75">
                 <div className="position-absolute top-50 start-50 translate-middle" style={{minWidth:"400px"}}>
                     <div className="modal-dialog">
                         <div className="modal-content">
@@ -91,7 +96,7 @@ const InscriptionModal  = () => {
 
                                     <div className="mb-3">
 
-                                         <label htmlFor="signUpPwd" className="form-label">Password</label>
+                                         <label htmlFor="signUpPwd" className="form-label">Mot de passe</label>
                                         <input ref ={addInputs} name="pwd" required type="password" className="form-control" id= "signUpPwd"/>
                                     </div>
 
@@ -99,12 +104,12 @@ const InscriptionModal  = () => {
 
 
                                     <div className="mb-3">
-                                         <label htmlFor="repeatPwd" className="form-label">Repeat Password</label>
+                                         <label htmlFor="repeatPwd" className="form-label">Repetez le mot de passe</label>
                                         <input ref ={addInputs} name="pwd" required type="password" className="form-control" id= "repeatPwd"/>
                                         <p className="text-danger mt-1">{validation}</p>
                                     </div>
 
-                                    <button className="btn btn-primary">S'inscrire</button>
+                                    <button className="btn btn-primary">S'inscrire</button> 1:10:21
                                 </form>    
                             </div>
                         </div>
@@ -119,4 +124,4 @@ const InscriptionModal  = () => {
   );
 }
 
-export default InscriptionModal
+export default InscriptionModal;

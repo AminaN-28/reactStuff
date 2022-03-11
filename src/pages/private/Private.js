@@ -1,6 +1,6 @@
 import React , {useContext}from 'react'
 import { UserContext } from '../../context/userContext'; 
-import{Outlet, useLocation , Navigate} from "react-router-dom";
+import{Outlet , Navigate} from "react-router-dom";
 
 const Private = () => {
 
@@ -14,8 +14,8 @@ const Private = () => {
     }
   return (
     <div className='container'>
+         {/* Preciser là ou on veut mettre le contenu de notre route imbriquée Outlet est la sortie   */}
         <Outlet/> 
-        {/* Preciser là ou on veut mettre le contenu de notre route imbriquée    */}
     </div>
   )
 }
